@@ -1,29 +1,14 @@
 <?
+    //import the auth library
+    require_once 'auth.php';
 
-    //structure
-    $user= [
-        'username' => 'johny777',
-        'email'    => 'johny777@example.host',
-        'password' => '1234567',
-        'active'   => true,
-        'rating'   => 4.5
-    ];
+    // register another user
+    // register('testuser4', 'test4@e.host', '123456' );
+    $user = authenticate('testuser3', '123456');
+    var_dump($user);
 
-    //behavior: functions
-    function renderProfile(array $user): string {
-        $template = "<div>" .
-                        "<h2>{$user['username']}</h2>" .
-                    "</div>";
-        return $template;
-    }
+    //search the user
 
+    // var_dump( search('testuser3') );
 
 ?>
-
-<?
-
-    $html = renderProfile($user);
-
-?>
-
-<? print($html)?>
