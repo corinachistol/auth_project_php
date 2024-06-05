@@ -1,5 +1,4 @@
 <?
-
     function register($username, $email, $password) {
 
         //HW2: 
@@ -32,6 +31,10 @@
 
     };
 
+
+
+
+
     function unregister($username) {
 
     };
@@ -56,12 +59,28 @@
 
 
 
-    function login($username) {
-        
+    function login($user) {   // <----- signature
+        session_status() == PHP_SESSION_ACTIVE || session_start();
+        //remove password from the data
+        unset($user[2]);
+        $_SESSION['user'] = $user;
 
     };
 
-    function logout($username) {
+
+
+
+    function is_loged_in () {
+        session_status() == PHP_SESSION_ACTIVE || session_start();
+        return isset($_SESSION['user']);
+    }
+
+
+
+
+    function logout() {
+        session_status() == PHP_SESSION_ACTIVE || session_start();
+        unset($_SESSION['user']);
 
     };
 
@@ -86,8 +105,6 @@
 
         return $user;
     };
-
-
 ?>
 
 <!-- 

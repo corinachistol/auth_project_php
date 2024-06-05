@@ -196,3 +196,74 @@ EX: verificarea persoanei la vama, presentarea unui permis, foaie de drum
 
 session_start() = generates a PHPSESSID and keep it inside a FILE on server. It can be seen in Application, cookies
  cookies = small pockets on client side where different websites can put some information
+
+
+
+
+
+
+
+
+
+
+
+
+
+ BROWSER
+
+ COOKIES
+ +-------------------------------------+
+                                       |
+                                       |
+                                       |
+                                       |
+                                       |
+                                       |
+                                       |
+                                       |
+ +-------------------------------------+
+
+
+
+
+
+
+
+   ## login
+
+   HW1: finish  the diagram for authenticate() call
+ ------ req --- ---------------------------> index.php
+                                                |
+                                                v
+                                                + $username = 'testuser3'
+                                                + $password = '123456'
+                                                |
+                                                v
+                                                $user = authenticate(...)
+                                                |
+                                                v
+               +-- print("Wrong...") <-- false--$user ? 
+               |                                 |
+               |                                 true
+               |                                 |
+               |                                 +-----> login($user)
+               |                                 |            |
+               |                                 |            v
+               |                                 |            session_start() ->FILE/tmp <+
+               |                                 |            |                           |
+               |                                 |            v                           |
+               |                                 |            unset($user(2))             |
+               |                                 |            |                           |
+               |                                 |            v                           |
+               |                                 |            $_SESSION['user'] = $user --+
+               |                                 |            |
+               |                                 <--- ret ---+
+               |                                 |
+               |                                 v
+               |                                 print("Welcome")
+               v                                 |
+<----- res-----+--------------------------------+
+
+
+
+
