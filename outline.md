@@ -240,28 +240,36 @@ session_start() = generates a PHPSESSID and keep it inside a FILE on server. It 
                                                 |
                                                 v
                                                 $user = authenticate(...)
-                                                |
-                                                v
-               +-- print("Wrong...") <-- false--$user ? 
-               |                                 |
-               |                                 true
-               |                                 |
-               |                                 +-----> login($user)
-               |                                 |            |
-               |                                 |            v
-               |                                 |            session_start() ->FILE/tmp <+
-               |                                 |            |                           |
-               |                                 |            v                           |
-               |                                 |            unset($user(2))             |
-               |                                 |            |                           |
-               |                                 |            v                           |
-               |                                 |            $_SESSION['user'] = $user --+
-               |                                 |            |
-               |                                 <--- ret ---+
-               |                                 |
-               |                                 v
-               |                                 print("Welcome")
-               v                                 |
+                                                               |
+                                                               v
+            +-----return false ---------------------false --- $user = search($username) ?
+            |                                                  |
+            |                                                  true
+            |                                                  |
+            |                                                  return $user
+            |                                   +--------------+
+            |                                   |
+            |                                   v
+            |  +-- print("Wrong...") <-- false--$user ? 
+            |  |                                 |
+            |  |                                 true
+            |  |                                 |
+            |  |                                 +-----> login($user)
+            |  |                                 |            |
+            |  |                                 |            v
+            |  |                                 |            session_start() ->FILE/tmp <+
+            |  |                                 |            |                           |
+            |  |                                 |            v                           |
+            |  |                                 |            unset($user(2))             |
+            |  |                                 |            |                           |
+            |  |                                 |            v                           |
+            |  |                                 |            $_SESSION['user'] = $user --+
+            |  |                                 |            |
+            |  |                                 <--- ret ---+
+            |  |                                 |
+            |  |                                 v
+            |  |                                 print("Welcome")
+            v  v                                 |
 <----- res-----+--------------------------------+
 
 
