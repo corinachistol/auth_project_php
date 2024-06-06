@@ -8,10 +8,12 @@
         if(search($username)){
             print("ERROR:The username is taken");
         }else{
+            $hash_password = md5($password);
+
             $user = [
                 $username , 
                 $email,
-                $password,
+                $hash_password, // HW1: substitue with md5 hash
                 true,
                 0.0
             ];
@@ -48,8 +50,10 @@
         // returns either user array or false
 
         $user = search($username);
+        $hash_password = md5($password);
 
-        if(!$user || $user[2] !== $password ) return false;
+
+        if(!$user || $user[2] !== $hash_password ) return false;
 
         return $user;
 

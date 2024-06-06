@@ -142,7 +142,7 @@ x parent.remove() <------ memory leak
 
 
 
-## LOGIN
+## LOGIN  p4
 
 > SESSIONS (file based)
 > statefull mecahanism
@@ -229,7 +229,14 @@ session_start() = generates a PHPSESSID and keep it inside a FILE on server. It 
 
 
 
-   ## login
+
+
+
+
+
+
+
+   ## login  p5
 
    HW1: finish  the diagram for authenticate() call
  ------ req --- ---------------------------> index.php
@@ -247,31 +254,102 @@ session_start() = generates a PHPSESSID and keep it inside a FILE on server. It 
             |                                                  true
             |                                                  |
             |                                                  return $user
-            |                                   +--------------+
-            |                                   |
-            |                                   v
-            |  +-- print("Wrong...") <-- false--$user ? 
-            |  |                                 |
-            |  |                                 true
-            |  |                                 |
-            |  |                                 +-----> login($user)
-            |  |                                 |            |
-            |  |                                 |            v
-            |  |                                 |            session_start() ->FILE/tmp <+
-            |  |                                 |            |                           |
-            |  |                                 |            v                           |
-            |  |                                 |            unset($user(2))             |
-            |  |                                 |            |                           |
-            |  |                                 |            v                           |
-            |  |                                 |            $_SESSION['user'] = $user --+
-            |  |                                 |            |
-            |  |                                 <--- ret ---+
-            |  |                                 |
-            |  |                                 v
-            |  |                                 print("Welcome")
-            v  v                                 |
-<----- res-----+--------------------------------+
+            |                                                   |
+            |                                                   |
+            |                                                   v
+            |                  +-- print("Wrong...") <-- false--$user ? 
+            |                  |                                 |
+            |                  |                                 true
+            |                  |                                 |
+            |                  |                                 +-----> login($user)
+            |                  |                                 |            |
+            |                  |                                 |            v
+            |                  |                                 |            session_start() ->FILE/tmp <+
+            |                  |                                 |            |                           |
+            |                  |                                 |            v                           |
+            |                  |                                 |            unset($user(2))             |
+            |                  |                                 |            |                           |
+            |                  |                                 |            v                           |
+            |                  |                                 |            $_SESSION['user'] = $user --+
+            |                  |                                 |            |
+            |                  |                                 <--- ret ---+
+            |                  |                                 |
+            |                  |                                 v
+            |                  |                                 print("Welcome")
+            v                  v                                 |
+<----- res-----+--------------------------------------------------+
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Password security p6
+> hashing
+> encryption / decryption
+
+datele sensibile trebuiesc criptate ori ascunse
+
+
+
+
+            * protection , date ca nu sunt vizibile in format deschis
+            * checksum
+
+                        hashing
+source text   ------------->x--------------------------> hash 
+            /
+bytes-----+
+
+
+din hash e foarte greu sa descifrezi in text inapoi
+hash ne ofera posibilitatea de a verifica check sum
+informatia dupa hash se pierde, ea poate doar fi comparata cu acelasi hash
+
+
+
+
+
+
+
+            * protection , date ca nu sunt vizibile in format deschis
+           
+
+                        encryption
+source text   ------------->x--------------------------> cipher
+            /                                               |
+bytes-----+                                                 |
+   ^                                                        |
+   |                                                        |
+   +------------------------x-------------------------------+
+                        decryption
+
+
+
+
+
+
++-----------------------+
+|                       |
+|    .....              |
+|                    <--- exploit / backdoor --------->
+|                       |
+|                       |
+|                       |
+|    users.csv          |
+|         ....123456    |
+|   ....                |
+|                       |
++-----------------------+
 
