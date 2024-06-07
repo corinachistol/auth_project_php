@@ -109,9 +109,6 @@
 
         return $user;
     };
-?>
 
-<!-- 
 
-Procesul de auth verifica cine este utilizatorul in cadrul aplicatiei
- -->
+// Procesul de auth verifica cine este utilizatorul in cadrul aplicatiei

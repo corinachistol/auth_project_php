@@ -2,7 +2,7 @@
     //import the auth library
     require_once 'auth.php';
      
-    // register('testuser7', 'testuser7@mail.com', '123456');
+    // register('testuser4', 'testuser4@mail.com', '123456');
 
     if(!empty($_POST)) {
         // //0.a user enters data in the form
@@ -21,9 +21,9 @@
         }
     }
 
-    // if(isset($_GET['logout'])){
-    //     logout();
-    // }
+    if(isset($_GET['logout'])){
+        logout();
+    }
  
 
 
