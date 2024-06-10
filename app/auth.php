@@ -1,8 +1,13 @@
 <?
+    //HW5***:
+    // try to use json, xml,yml instead of csv
+
     function register($username, $email, $password) {
 
         //HW2: 
         //  search the user after username and password
+    // try to use if/else conditional in a different manner
+    //  hint : inversion, return
              
         //check if the username is available
         if(search($username)){
@@ -38,6 +43,13 @@
 
 
     function unregister($username) {
+        // HW*: remove the user by username
+        // 1. read from users.csv
+        // 2. open for writing temp.csv 
+        // 3. loop through the original + condition if username matches
+        // 4. if the condition fails , copy temp.csv, ignore the one to delete
+        // 5. remove the users.csv file 
+        // 6. rename temp.csv ->> users.csv
 
     };
 
@@ -52,8 +64,10 @@
         $user = search($username);
         $hash_password = md5($password);
 
-
-        if(!$user || $user[2] !== $hash_password ) return false;
+        // if(!$user || $user[2] !== $hash_password ) return false;
+        
+        //compare hashes another method
+        if(!$user || password_verify($password, $user[2] ) ) return false;
 
         return $user;
 

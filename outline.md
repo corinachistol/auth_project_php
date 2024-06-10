@@ -353,3 +353,17 @@ bytes-----+                                                 |
 |                       |
 +-----------------------+
 
+
+
+
+
+
+
+  +------ locking / unlocking
+  |
+  |                         +-- client 1
+  v                        /
+FILE (.csv) <-------------+---- client 2
+ |                         \      
+ +-- read                   +-- client 3
+ +-- write
