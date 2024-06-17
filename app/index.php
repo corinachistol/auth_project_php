@@ -3,6 +3,7 @@
     require_once 'auth.php';
      
     // register('testuser4', 'testuser4@mail.com', '123456');
+    unregister('testuser4');
 
     if(!empty($_POST)) {
         // //0.a user enters data in the form

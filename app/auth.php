@@ -6,8 +6,8 @@
 
         //HW2: 
         //  search the user after username and password
-    // try to use if/else conditional in a different manner
-    //  hint : inversion, return
+        // try to use if/else conditional in a different manner
+        //  hint : inversion, return
              
         //check if the username is available
         if(search($username)){
@@ -18,7 +18,7 @@
             $user = [
                 $username , 
                 $email,
-                $hash_password, // HW1: substitue with md5 hash
+                $hash_password, // HW1: substitue with md5 hash - done
                 true,
                 0.0
             ];
@@ -45,11 +45,31 @@
     function unregister($username) {
         // HW*: remove the user by username
         // 1. read from users.csv
+        $fp = fopen('./data/users.csv', 'r');
+        
+        
         // 2. open for writing temp.csv 
+        $ftemp = fopen('./data/temp.csv','w');
+        
         // 3. loop through the original + condition if username matches
-        // 4. if the condition fails , copy temp.csv, ignore the one to delete
+        while (( $user = fgetcsv($fp) ) !== false) {
+
+            if ( $user[0] !== $username) { 
+                // 4. if the condition fails , copy temp.csv, ignore the one to delete
+                fputcsv($ftemp, $user);
+            }
+            
+        };
+        
+        
+        fclose($fp);
+        fclose($ftemp);
+
         // 5. remove the users.csv file 
+        unlink('./data/users.csv');
+
         // 6. rename temp.csv ->> users.csv
+        rename('./data/temp.csv','./data/users.csv');
 
     };
 
@@ -123,6 +143,8 @@
 
         return $user;
     };
+
+    
 
 
 // Procesul de auth verifica cine este utilizatorul in cadrul aplicatiei
